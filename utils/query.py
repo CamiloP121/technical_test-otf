@@ -1,13 +1,15 @@
 import requests
 from utils.helpers import *
 
-def searchAPI(api_key:str, page = 1) -> dict:
+def searchAPI(api_key:str, page:str = 0, limit:int = 100) -> dict:
     """
     Search through the API for a specific data collection.
     Database: contacts
     -----------------------------------------------------------------
     Args:
     - api_key (str): API key necessary for using the request
+    - page (str, optional): Page number for paginated results (default is 0)
+    - limit (int, optional): Number of results per page (default is 100)
     Returns:
     - response (dict): results of the search request
     """
@@ -24,7 +26,7 @@ def searchAPI(api_key:str, page = 1) -> dict:
             "value": "true"
             }
         ],
-        "limit": 1200,
+        "limit": limit,
         "after": f"{page}", 
         # Data extract
         "properties": ["raw_email", "country", "phone", 
@@ -51,4 +53,4 @@ def searchAPI(api_key:str, page = 1) -> dict:
     
     
     
-    return response.json()
+    return response
