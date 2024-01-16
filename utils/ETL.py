@@ -57,7 +57,7 @@ def find_email(txt: str) -> str:
     Returns:
     - str: The extracted email address, or "Error" if no email address is found
     """
-    
+
     regular_expression = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     try:
         # Use re.findall to find all email addresses in the text, and take the first one
@@ -66,3 +66,22 @@ def find_email(txt: str) -> str:
         print("Error:", e)
         emails_found = "Error"
     return emails_found
+
+def normalize_phones(dict_normalize_phones:dict, phone:str, country:str) -> str:
+    """
+    Normalize a phone number based on a dictionary of country-specific standardizations.
+    ---------------------------------------------------------------
+    Parameters:
+    - dict_normalize_phones (dict): A dictionary containing country-specific phone number standardizations
+    - phone (str): The original phone number to be normalized
+    - country (str): The country associated with the phone number
+    Returns:
+    - str: The normalized phone number
+    """
+    
+    assert phone != "", "Empty phone"
+    assert country in dict_normalize_phones.keys(), f"{country} is not in the dictionary of standardizations"
+    
+    if phone[0] == "0": phone = phone[1:]
+    tmp_phone = "".join(phone.split("-"))
+    return f"{dict_normalize_phones[country]} {tmp_phone}"
