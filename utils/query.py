@@ -1,7 +1,7 @@
 import requests
 from utils.helpers import *
 
-def searchAPI(api_key:str) -> dict:
+def searchAPI(api_key:str, page = 1) -> dict:
     """
     Search through the API for a specific data collection.
     Database: contacts
@@ -24,6 +24,8 @@ def searchAPI(api_key:str) -> dict:
             "value": "true"
             }
         ],
+        "limit": 1200,
+        "after": f"{page}", 
         # Data extract
         "properties": ["raw_email", "country", "phone", 
                        "technical_test___create_date", 
@@ -38,12 +40,15 @@ def searchAPI(api_key:str) -> dict:
     }
 
     # Search
-    try:
-        response = requests.post("https://api.hubapi.com/crm/v3/objects/contacts/search", 
-                                 json=input, headers=headers)
-    except Exception as e:
+    
+    response = requests.post("https://api.hubapi.com/crm/v3/objects/contacts/search", 
+                                 json=input, headers=headers).json()
+    
+    if "status" in response:
         printr("Error in:")
-        print(e)
-        raise "Error consult API"
+        print(response["message"])
+        raise Exception("Error consult API")
+    
+    
     
     return response.json()
