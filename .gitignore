@@ -1,3 +1,9 @@
 # Ignore directories to github repositories
 
 keys/
+
+
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints
