@@ -29,7 +29,8 @@ def searchAPI(api_key:str, page:str = 0, limit:int = 100) -> dict:
         "limit": limit,
         "after": f"{page}", 
         # Data extract
-        "properties": ["raw_email", "country", "phone", 
+        "properties": ["firstname","lastname",
+                       "raw_email", "country", "phone", 
                        "technical_test___create_date", 
                        "industry", "address", "address", 
                        "hs_object_id"]
