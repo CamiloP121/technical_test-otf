@@ -1,6 +1,6 @@
 import requests
 import json
-from utils.helpers import *
+from models.helpers import *
 import pandas as pd
 
 def searchAPI(api_key:str, page:str = 0, limit:int = 100) -> dict:
