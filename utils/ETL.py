@@ -45,7 +45,7 @@ def found_contry(country: str):
     if country_search != country:
         city = country
     
-    return country_search, country
+    return country_search, city
 
 
 def find_email(txt: str) -> str:

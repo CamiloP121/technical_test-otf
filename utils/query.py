@@ -1,5 +1,7 @@
 import requests
+import json
 from utils.helpers import *
+import pandas as pd
 
 def searchAPI(api_key:str, page:str = 0, limit:int = 100) -> dict:
     """
@@ -52,6 +54,55 @@ def searchAPI(api_key:str, page:str = 0, limit:int = 100) -> dict:
         print(response["message"])
         raise Exception("Error consult API")
     
-    
-    
     return response
+
+
+def sendAPI(api_key:str, input_data:pd.DataFrame) -> dict:
+    """
+    Search through the API for a specific data collection.
+    Database: contacts
+    -----------------------------------------------------------------
+    Args:
+    - api_key (str): API key necessary for using the request
+    - input_data (DataFrame): Row as send to create a new contact
+    Returns:
+    - response (dict): results of the search request
+    """
+
+    assert api_key != "", "Empty API key"
+
+    # Input parameters
+    json_data_send = {
+        "inputs": [
+            {
+                "properties": {
+                     "firstname": input_data["firstname"],
+            "lastname": input_data["lastname"],
+            "email": input_data["email"],
+            "phone": input_data["phone"],
+            "country": input_data["country"],
+            "city": input_data["city"],
+            "original_create_date": input_data["original_create_date"],
+            "original_industry": input_data["original_industry"],
+            "temporary_id": int(input_data["temporary_id"])
+                }
+            }
+        ]
+    }
+    
+    # Other parameters
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {api_key}'
+    }
+
+    # Search
+    response = requests.post("https://api.hubapi.com/crm/v3/objects/contacts/batch/create", 
+                                 json=json_data_send, headers=headers).json()
+    
+    if  response["status"] == "error":
+        printr("Error in:")
+        print(response)
+        print("\n", input)
+    
+    return response["status"]
