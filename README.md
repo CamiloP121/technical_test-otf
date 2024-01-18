@@ -1,8 +1,8 @@
 # Technical Test Phase II: Data Engineer & Analyst
 
-- Candidato: Camilo Andrés Pérez Ospino
-- Telfono: 3238119950
-- Correo: camilo.perez.osp@gmail.com
+- Candidate: Camilo Andrés Pérez Ospino
+- Phone: 3238119950
+- Mail: camilo.perez.osp@gmail.com
 
 ## Technical test: 
 Our team designed and save a DataFrame with dummy records in a Source HubSpot
