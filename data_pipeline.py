@@ -9,8 +9,8 @@ from datetime import datetime
 from IPython.display import clear_output
 
 # Own functions
-from utils import query, ETL
-from utils.helpers import *
+from models import query, ETL
+from models.helpers import *
 
 """## Load api key"""
 
