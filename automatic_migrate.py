@@ -156,6 +156,7 @@ def automatic_migrate_source2accoutn_otf(API_KEY_SOURCE:str,
     for i, v in zip(index, values):
         print(f"\n{i}, Count: {v}")
 
+
 if __name__ == "__main__":
 
     keys_path = "keys/api_key.json"
